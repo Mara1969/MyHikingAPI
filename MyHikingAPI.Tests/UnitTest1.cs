@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using MyHikingAPI.Services;
 
+
 namespace MyHikingAPI.Tests
 {
     public class ServicesTest
@@ -22,7 +23,8 @@ namespace MyHikingAPI.Tests
             
             //Assert 
             mountains.Should().NotBeNullOrEmpty(); // checks if list is not null or empty 
-
+            mountains.Count.Should().Be(5); // Check if the list contains exactly 5 items 
+            mountains.Should().Contain(m => m.Name == "K2"); // checks if the list contains a mountain with name "K2"
 
         }
     
