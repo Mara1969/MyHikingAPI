@@ -2,9 +2,9 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using MyHikingAPI.Services;
 
-[assembly: FunctionsStartup(typeof(MyNamespace.Startup))]
+[assembly: FunctionsStartup(typeof(MyHikingAPI.Startup))]
 
-namespace MyNamespace;
+namespace MyHikingAPI;
 
 public class Startup : FunctionsStartup
 {
@@ -13,10 +13,9 @@ public class Startup : FunctionsStartup
          
         builder.Services.AddHttpClient();
 
-        builder.Services.AddSingleton<IMountainService, MountainService>((s) => {
-            return new MyService();
-        });
+        builder.Services.AddSingleton<IMountainService, MountainService>();
+        
 
-        builder.Services.AddSingleton<ILoggerProvider, MyLoggerProvider>();
+        //builder.Services.AddSingleton<ILoggerProvider, MyLoggerProvider>();
     }
 }
