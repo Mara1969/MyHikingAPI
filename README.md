@@ -65,6 +65,18 @@ This project uses DI to register and resolve services in Azure Functions. DI mak
 ### Running Tests 
 - Use the Testing icon on the left-hand side (it looks like a flask)
 
+## Asynchronous Programming in Azure Functions 
+This project uses async/await for non-blocking I/O operations, which is a best practice in Azure Functions.
+
+### What is an I/O operation?
+- I/O (input/output) refers to reading or writing data to external resources like files, network streams, or databases.
+- These operations are slower than CPU work because they depend on external systems.
+
+### Why async/await?
+- Non-blocking I/O: Reading the HTTP request body is an I/O operation. Using `await` means the function doesn't block while waititing for the data.
+- Improved scalability: Serverless environments benefit from freeing threads during I/O, enabling more concurrent executions.
+- Cleaner code: Async/await avoids complex callbacks and makes asynchronous code easier to read.
+
 
 ## Running the app
 *To be added*
