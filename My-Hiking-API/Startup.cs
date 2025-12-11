@@ -13,7 +13,7 @@ public class Startup : FunctionsStartup
     public override void Configure(IFunctionsHostBuilder builder)
     {
          
-        builder.Services.AddHttpClient();
+        //builder.Services.AddHttpClient();
 
         builder.Services.AddSingleton<IMountainService, MountainService>(); // Registers domain service so it can be injected 
         

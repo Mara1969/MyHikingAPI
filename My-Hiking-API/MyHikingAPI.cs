@@ -17,7 +17,7 @@ namespace My.Functions
     public class MyHikingAPI
     {
         private readonly IMountainService _mountainService; // Domain service used to retrieve mountains 
-        private readonly HttpClient _client;
+        // private readonly HttpClient _client;
         // private readonly ILogger<MyHikingAPI> _log; // Class-level logger 
 
         // Constructor. Dependencies are injected by the functions DI container 
@@ -29,7 +29,7 @@ namespace My.Functions
         {
             // Stoe dependencies for later use
             this._mountainService = mountainService; 
-            this._client = httpClientFactory.CreateClient();
+            // this._client = httpClientFactory.CreateClient();
            // _log = log; 
         }
     
@@ -46,7 +46,7 @@ namespace My.Functions
 
             string name = req.Query["name"];
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync(); // Asynchronous read of request body
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
 
