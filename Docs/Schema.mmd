@@ -27,12 +27,12 @@ erDiagram
         guid HikerId FK "Foreign Key to Hikers"
         guid TrailId FK "Foreign Key to Trails"
         datetime DateCompleted "Date when the hiker completed the trail"
-        int TimeTaken "Time taken to complete the trail in minutes"
+        int TimeTaken "Time taken to complete the trail in days"
     }
     Mountains {
         guid Id PK "Primary Key"
         string Name "Name of the mountain"
-        float Elevation "Elevation of the mountain in meters"
+        float Height "Elevation of the mountain in meters"
     }
     TrailMountains {
         guid TrailId FK "Foreign Key to Trails"
