@@ -19,8 +19,20 @@
     <ProjectReference Include="..\My-Hiking-API\My-Hiking-API.csproj" />
   </ItemGroup>
 
+  
+  <ItemGroup>
+    <None Include="Data\mountainsTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>
