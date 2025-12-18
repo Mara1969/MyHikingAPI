@@ -10,12 +10,7 @@ erDiagram
         int Id PK "Primary Key"
         string Description "Description of experience level, i.e. Beginner, Intermediate, Expert"
     }
-    Ratings {
-        guid Id PK "Primary Key"
-        guid HikerId FK "Foreign Key to Hikers"
-        guid TrailId FK "Foreign Key to Trails"
-        int RatingValue "Rating value given by the hiker (1-5)"
-    }
+
     Trails {
         guid Id PK "Primary Key"
         string Name "Name of the trail"
@@ -28,6 +23,7 @@ erDiagram
         guid TrailId FK "Foreign Key to Trails"
         datetime DateCompleted "Date when the hiker completed the trail"
         int TimeTaken "Time taken to complete the trail in days"
+        int RatingValue "Rating value given by the hiker (1-5)"
     }
     Mountains {
         guid Id PK "Primary Key"
@@ -39,8 +35,7 @@ erDiagram
         guid MountainId FK "Foreign Key to Mountains"
     }
 
-    Hikers ||--o{ Ratings : "post"
-    Ratings ||--o{ Trails : "link"
+
     Hikers ||--o{ HikerTrails : "perform"
     Trails ||--o{ HikerTrails : "link"
     Trails ||--o{ TrailMountains : "include"
