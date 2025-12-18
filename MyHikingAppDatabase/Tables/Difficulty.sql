@@ -1,0 +1,5 @@
+CREATE TABLE [dbo].[Difficulty]
+(
+  [Id] INT NOT NULL PRIMARY KEY DEFAULT NEWID(),
+  [Description] VARCHAR(100) NOT NULL
+);

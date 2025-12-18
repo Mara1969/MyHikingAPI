@@ -1,7 +1,6 @@
-CREATE TABLE [dbo].[MountainsTable]
+CREATE TABLE [dbo].[Mountains]
 (
   [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
   [Name] NVARCHAR(100) NOT NULL,
-  [Height] INT NOT NULL,
-  [Location] NVARCHAR(100) NOT NULL, 
+  [Height] INT NOT NULL
 );

@@ -1,0 +1,12 @@
+CREATE TABLE [dbo].[Ratings]
+(
+  [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
+  [HikerId] UNIQUEIDENTIFIER NOT NULL,
+  [TrailId] UNIQUEIDENTIFIER NOT NULL,
+  [Rating] INT NOT NULL
+
+  CONSTRAINT FK_Ratings_Hikers FOREIGN KEY ([HikerId])
+        REFERENCES Hikers([Id]),
+  CONSTRAINT FK_Ratings_Trails FOREIGN KEY ([TrailId])
+        REFERENCES Trails([Id])
+);
