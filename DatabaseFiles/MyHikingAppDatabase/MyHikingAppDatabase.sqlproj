@@ -15,5 +15,5 @@
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
-  </Target>
+  </Target> 
 </Project>
