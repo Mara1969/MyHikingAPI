@@ -18,8 +18,10 @@ namespace MyHikingAPI.Services
         // Connect to the database 
         public DbConnection CreateConnection()
         {
-            return new SqlConnection(_settings.ConnectionString); 
+        using (var connection = new SqlConnection(_settings.ConnectionString)) 
+        {    
+        // Create a query that retrieves all books with an author name of "John Smith"    
+         
         }
-
     }
 }
