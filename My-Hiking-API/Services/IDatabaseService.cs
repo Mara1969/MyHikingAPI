@@ -1,11 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
+using MyHikingAPI.Models;
 
 namespace MyHikingAPI.Services
 {
     public interface IDatabaseService
     {
-        DbConnection CreateConnection();
+        List<Mountain> GetMountainNames();
     }
 
 }
