@@ -1,8 +1,0 @@
-CREATE TABLE [dbo].[TrailsTable]
-(
-  [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
-  [Name] NVARCHAR(100) NOT NULL,
-  [MountainName] NVARCHAR(100) NOT NULL,
-  [Difficulty] NVARCHAR(100) NOT NULL,
-  [Distance] DECIMAL(6,2) NOT NULL, -- this is in km 
-);
