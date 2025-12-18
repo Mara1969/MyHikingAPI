@@ -8,10 +8,10 @@ namespace MyHikingAPI.Tests
     public class JsonReaderTest
     {
         [Fact]
-        public void GetData_CheckIfReturnsPopulatedListOfMountains()
+        public void GetData_CheckIfReturnsTypeDataWhenFileExists()
         {
             //Arrange 
-            String filename = "Data/mountainsTest.json";
+            String filename = Path.Combine("Data", "mountainsTest.json");
                            
             //Act 
             List<Mountain> output = JsonReader.GetData<Mountain>(filename); 
@@ -25,14 +25,14 @@ namespace MyHikingAPI.Tests
         public void GetData_WhenFileDoesNotExist_ShouldThrowFileNotFoundException()
         {
             // Arrange
-            string filename = "Data/nonexistentfile.json";
+            string filename = Path.Combine("Data", "nonexistentfile.json");
 
             // Act
             Action act = () => JsonReader.GetData<Mountain>(filename);
 
             // Assert
-            act.Should().Throw<FileNotFoundException>();
-                //.WithMessage($"*{filename}*");
+            act.Should().Throw<FileNotFoundException>()
+                .WithMessage($"*{filename}*");
         }
     }
 }
