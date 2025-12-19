@@ -125,6 +125,16 @@ For creating the MyOptions class, local.settings.json file and registering the S
 - In `Startup.cs` use the doc above to register the SqlDatabaseOption with DI to inject `IOptions<SqlDatabaseOptions>` anywhere to access settings like the database connection string
 - In the services folder create a `DatabaseService` class (in the doc this class is HttpTrigger) and a `IDatabaseService` interface 
 
+### Database Seeding and Data Flow (JSON -> SQL -> API)
+This project uses two distinct services to separate concerns between reading data and persisting data. Understanding this separation is key to understanding how data flows through the application.
+
+- JsonReader -> Reads static JSON files from disk
+    No Database interaction occurs at this stage
+- MountainService -> Provides domain data (mountains) from JSON
+    No Database interaction occurs at this stage. The service simply returns a list of Mountain objects 
+- DatabaseService -> Persists and retrieves data from SQL Server
+    The database connection is scoped to a `using` block to ensure it is safely disposed. The service simply accepts domain objects and persists them
+- Azure Function -> Orchestrates the flow between services
 
 ## Running the app
 *To be added*
