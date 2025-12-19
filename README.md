@@ -25,6 +25,8 @@ Download the below NuGet packages or ensure you have them:
     for IHttpClientFactory (used in DI)
 - **Microsoft.Extensions.DependencyInjection**
     for DI 
+- **Microsoft.Data.SqlClient**
+    for using Dapper to query SQL server 
 
 ## Features 
 - HTTP-triggered Azure Function
@@ -77,7 +79,21 @@ This project uses async/await for non-blocking I/O operations, which is a best p
 - Improved scalability: Serverless environments benefit from freeing threads during I/O, enabling more concurrent executions.
 - Cleaner code: Async/await avoids complex callbacks and makes asynchronous code easier to read.
 
-## SQL Server Connectivity 
+## Creating a Database Project and Connecting to a Database 
+A SQL database project is a local representation of SQL objects that comprise the schema for a single database, such as tables, stored procedures, or functions. 
+
+Dapper ORM (object relational mapping) is used for database access, mapping queries to objects.
+
+### Prerequisites 
+- Install SQL Database Projects extension for VS Code 
+- Install SQL Server Management Studio 
+    https://learn.microsoft.com/en-us/ssms/install/install
+
+### Connecting with SSMS (Database Engine)
+Follow the istructions in this doc to connect to the database engine: 
+    https://learn.microsoft.com/en-us/sql/relational-databases/lesson-1-connecting-to-the-database-engine?view=sql-server-ver17&source=recommendations
+
+### SQL Server Connectivity 
 If SQL Server fails to start or connect (e.g., Error 802: insufficient memory, Error 1069: logon failure, or SSL certificate issues), follow these steps in command prompt (run as admin):
 - Check if the SQL server is running: 
     sc query MSSQLSERVER
@@ -95,6 +111,19 @@ If SQL Server fails to start or connect (e.g., Error 802: insufficient memory, E
     sqlcmd -S lpc:localhost -E -C -d master -Q "SELECT @@SERVERNAME;"
 - Start SQL server in minimal configuration (if memory error occurs): 
     sqlcmd -S lpc:localhost -E -C -d master -Q "EXEC sp_configure 'show advanced options',1; RECONFIGURE WITH OVERRIDE; EXEC sp_configure 'max server memory (MB)',1024; EXEC sp_configure 'min server memory (MB)',0; RECONFIGURE WITH OVERRIDE;"
+
+### SQL Database Project
+To create a new project, add objects to the project, build and deploy the project follow the instructions in this doc:
+    https://learn.microsoft.com/en-us/sql/tools/sql-database-projects/get-started?view=sql-server-ver17&pivots=sq1-visual-studio-code 
+
+### Connecting to the Database via Dapper 
+For creating the MyOptions class, local.settings.json file and registering the SqlDatabaseOptions with DI follow the instructions in this doc:
+    https://docs.azure.cn/en-us/azure-functions/functions-dotnet-dependency-injection
+
+- Create a `Configuration` folder within models, and a `SqlDatabaseOptions` class 
+- Create a local.settings.json file on the same level as `My-Hiking-API.csproj` 
+- In `Startup.cs` use the doc above to register the SqlDatabaseOption with DI to inject `IOptions<SqlDatabaseOptions>` anywhere to access settings like the database connection string
+- In the services folder create a `DatabaseService` class (in the doc this class is HttpTrigger) and a `IDatabaseService` interface 
 
 
 ## Running the app
