@@ -1,31 +1,26 @@
 [{
     "Id": "b5619b7a-4ecb-450b-86d6-e6c0f6c8802b",
     "Name": "Mount Everest",
-    "Height": 8849,
-    "Location": "Nepal, China"
+    "Height": 8849
 },
 {
     "Id": "809fd9bd-477d-414c-82b9-9a712534a025",
     "Name": "K2",
-    "Height": 8611,
-    "Location": "Pakistan, China"
+    "Height": 8611
 },
 {
     "Id": "3d91ef6b-e272-4123-a4c2-c0f30c79d092",
     "Name": "Kangchenjunga",
-    "Height": 8586,
-    "Location": "India, Nepal"
+    "Height": 8586
 },
 {
     "Id": "933b309b-e7a6-4b77-b57c-027a3f455bb2",
     "Name": "Lhotse",
-    "Height": 8516,
-    "Location": "Nepal, China"
+    "Height": 8516
 },
 {
     "Id": "5ccb7dff-823e-4246-99f9-df0ff2ff55da",
     "Name": "Makalu",
-    "Height": 8485,
-    "Location": "Nepal, China"
+    "Height": 8485
 }
 ]
