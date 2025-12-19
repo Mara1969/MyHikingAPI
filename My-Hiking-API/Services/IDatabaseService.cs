@@ -7,7 +7,8 @@ namespace MyHikingAPI.Services
 {
     public interface IDatabaseService
     {
-        List<Mountain> GetMountainNames();
+        List<Mountain> GetAllMountains();
+        void InsertMountains(List<Mountain> mountains);
     }
 
 }
