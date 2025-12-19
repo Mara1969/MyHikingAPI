@@ -56,11 +56,13 @@ This project uses DI to register and resolve services in Azure Functions. DI mak
 ### Setting Up Tests 
 - A test project was created (MyHikingAPI.Tests), and the My-Hiking-API project was added as a reference project. This allows the test project to point to the main project
 - To ensure the tests run successfully, the My-Hiking-API.csproj file was updated to include an ItemGroup that specifies the location of the mountains.json file. Without this update, the tests would fail. Below is an example of the ItemGroup added to the .csproj file:
+```
 <ItemGroup>
     <None Update="Data\mountains.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
 </ItemGroup>
+```
 
 - The FluentAssertions package was added to the test project to write expressive and readable assertions
 
