@@ -26,6 +26,14 @@ namespace MyHikingAPI.Services
             FROM Mountains;";
 
             return await _databaseService.GetDataEntries<Mountain>(sql);
-        }         
+        }  
+        public async Task InsertMountainsDataToDb(List<Mountain> mountains)
+        {
+            const string sql = @"
+            INSERT INTO Mountains (Id, Name, Height) 
+            VALUES (@Id, @Name, @Height);";
+
+            await _databaseService.InsertDataEntries<Mountain>(sql, mountains);
+        }       
     }
 }
