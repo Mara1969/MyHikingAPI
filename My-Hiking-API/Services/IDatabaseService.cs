@@ -9,7 +9,7 @@ namespace MyHikingAPI.Services
     public interface IDatabaseService
     {
         Task<List<T>> GetDataEntries<T>(string sql);
-        void InsertMountains(List<Mountain> mountains);
+        Task InsertDataEntries<T>(string sql, IEnumerable<T> data);
     }
 
 }

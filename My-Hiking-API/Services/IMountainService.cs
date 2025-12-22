@@ -9,5 +9,6 @@ public interface IMountainService
 {
     List<Mountain> GetAllMountains();
     Task<List<Mountain>> GetAllMountainsFromDb();
+    Task InsertMountainsDataToDb(List<Mountain> mountains);
 
 }
