@@ -6,11 +6,12 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using MyHikingAPI.Models;
 using MyHikingAPI.Services;
+using System.Collections.Generic;
+using MyHikingAPI.Models;
 using System;
-using System.Linq;
-using System.Net.Http;
+
+
 
 namespace My.Functions
 {
@@ -22,12 +23,9 @@ namespace My.Functions
 
         // Constructor. Dependencies are injected by the functions DI container 
 
-        public MyHikingAPI(IMountainService mountainService 
-,
-            IHttpClientFactory httpClientFactory,
-            ILogger<MyHikingAPI> log)
+        public MyHikingAPI(IMountainService mountainService)
         {
-            // Stoe dependencies for later use
+            // Store dependencies for later use
             this._mountainService = mountainService; 
             // this._client = httpClientFactory.CreateClient();
            // _log = log; 
@@ -40,9 +38,40 @@ namespace My.Functions
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
             
-            // Call the injected mountain service to retieve all available mountains & Log the name of the retrieved mountains 
+            // Call the injected mountain service to retieve all available mountains & Log the number of the retrieved mountains 
             var mountains = _mountainService.GetAllMountains();
-            log.LogInformation($"Here are the list of mountains: {mountains.Select(m => m.Name).ToList()}");
+            // log.LogInformation($"Here are the list of mountains: {mountains.Select(m => m.Name).ToList()}");
+            log.LogInformation($"Inserting {mountains.Count} mountains into the database.");
+
+            try
+            {
+                await _mountainService.InsertMountainsDataToDb(mountains);
+                log.LogInformation("Inserted mountains data into the database.");
+            }
+            catch (Exception dbInsertEx)
+            {
+                log.LogError(dbInsertEx, "Error inserting mountains data into the database");
+                return new ObjectResult(new {error = "Failed to insert mountains data into the database."}) 
+                // default status code for ObjectResult is 200 OK which means the request was successful - this needs to be changed to indicate an error
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError
+                }; 
+            }
+
+            log.LogInformation("Retrieving mountains data from the database.");
+            try
+            {
+                List<Mountain> mountainsDataFromDb = await _mountainService.GetAllMountainsFromDb();
+                log.LogInformation($"Retrieved {mountainsDataFromDb.Count} mountains from the database.");
+            }
+            catch (Exception dbRetrieveEx)
+            {
+                log.LogError(dbRetrieveEx, "Error retrieving mountains data from the database");
+                return new ObjectResult(new {error = "Failed to retrieve mountains data from the database."})
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError
+                };
+            }
 
             string name = req.Query["name"];
 
