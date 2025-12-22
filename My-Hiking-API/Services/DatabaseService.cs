@@ -30,17 +30,12 @@ namespace MyHikingAPI.Services
         }
 
         // Method to insert values into the mountain table in the database
-         public void InsertMountains(List<Mountain> mountains)
+         public async Task InsertDataEntries<T>(string sql, IEnumerable<T> data)
         {
-            // using Dapper for simplified data insertion
-            const string sql = @"
-                INSERT INTO Mountains (Id, Name, Height)
-                VALUES (@Id, @Name, @Height);"; // act as plaeholders for the actual values
-
             using (var connection = new SqlConnection(_settings.ConnectionString))
             {
                     
-                connection.Execute(sql, mountains);
+                await connection.ExecuteAsync(sql, data);
                 
             }
         }
