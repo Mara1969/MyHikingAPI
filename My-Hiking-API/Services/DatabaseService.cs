@@ -6,6 +6,7 @@ using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using MyHikingAPI.Models;
 using Dapper;
+using System.Threading.Tasks;
 
 namespace MyHikingAPI.Services
 {
@@ -16,6 +17,16 @@ namespace MyHikingAPI.Services
         public DatabaseService(IOptions<SqlDatabaseOptions> options)
         {
             _settings = options.Value; // contains the bound ConnectionString 
+        }
+
+        // Generic method to retrieve data entries from the database based on the provided SQL query
+        public async Task<List<T>> GetDataEntries<T>(string sql)
+        {
+            using (var connection = new SqlConnection(_settings.ConnectionString))
+            {
+                var result = await connection.QueryAsync<T>(sql);
+                return result.AsList();
+            }
         }
 
         // Method to insert values into the mountain table in the database
@@ -34,22 +45,5 @@ namespace MyHikingAPI.Services
             }
         }
 
-        // Method to read from the database
-        public List<Mountain> GetAllMountains()
-        {
-            // using Dapper to simplify data retrieval
-            const string sql = @"
-                SELECT Id, Name, Height
-                FROM Mountains;
-            ";
-
-            // Connect to the database 
-
-            using (var connection = new SqlConnection(_settings.ConnectionString))
-            {
-                return connection.Query<Mountain>(sql).AsList();
-            }
-         
-        }
     }
 }
