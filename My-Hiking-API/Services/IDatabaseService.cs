@@ -8,8 +8,8 @@ namespace MyHikingAPI.Services
 {
     public interface IDatabaseService
     {
-        Task<List<T>> GetDataEntries<T>(string sql);
-        Task InsertDataEntries<T>(string sql, IEnumerable<T> data);
+        Task<List<T>> GetDataEntriesAsync<T>(string sql);
+        Task InsertDataEntriesAsync<T>(string sql, IEnumerable<T> data);
     }
 
 }

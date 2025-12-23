@@ -20,7 +20,7 @@ namespace MyHikingAPI.Services
         }
 
         // Generic method to retrieve data entries from the database based on the provided SQL query
-        public async Task<List<T>> GetDataEntries<T>(string sql)
+        public async Task<List<T>> GetDataEntriesAsync<T>(string sql)
         {
             using (var connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -30,7 +30,7 @@ namespace MyHikingAPI.Services
         }
 
         // Method to insert values into the mountain table in the database
-         public async Task InsertDataEntries<T>(string sql, IEnumerable<T> data)
+         public async Task InsertDataEntriesAsync<T>(string sql, IEnumerable<T> data)
         {
             using (var connection = new SqlConnection(_settings.ConnectionString))
             {

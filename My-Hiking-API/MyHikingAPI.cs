@@ -45,7 +45,7 @@ namespace My.Functions
 
             try
             {
-                await _mountainService.InsertMountainsDataToDb(mountains);
+                await _mountainService.InsertMountainsDataToDbAsync(mountains);
                 log.LogInformation("Inserted mountains data into the database.");
             }
             catch (Exception dbInsertEx)
@@ -61,7 +61,7 @@ namespace My.Functions
             log.LogInformation("Retrieving mountains data from the database.");
             try
             {
-                List<Mountain> mountainsDataFromDb = await _mountainService.GetAllMountainsFromDb();
+                List<Mountain> mountainsDataFromDb = await _mountainService.GetAllMountainsFromDbAsync();
                 log.LogInformation($"Retrieved {mountainsDataFromDb.Count} mountains from the database.");
             }
             catch (Exception dbRetrieveEx)

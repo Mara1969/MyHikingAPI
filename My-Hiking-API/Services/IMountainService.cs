@@ -8,7 +8,7 @@ namespace MyHikingAPI.Services;
 public interface IMountainService
 {
     List<Mountain> GetAllMountains();
-    Task<List<Mountain>> GetAllMountainsFromDb();
-    Task InsertMountainsDataToDb(List<Mountain> mountains);
+    Task<List<Mountain>> GetAllMountainsFromDbAsync();
+    Task InsertMountainsDataToDbAsync(List<Mountain> mountains);
 
 }

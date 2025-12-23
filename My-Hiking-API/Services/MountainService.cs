@@ -19,21 +19,21 @@ namespace MyHikingAPI.Services
         {
             return JsonReader.GetData<Mountain>("Data/mountains.json");
         }      
-        public async Task<List<Mountain>> GetAllMountainsFromDb()
+        public async Task<List<Mountain>> GetAllMountainsFromDbAsync()
         {
             const string sql = @"
             SELECT Id, Name, Height 
             FROM Mountains;";
 
-            return await _databaseService.GetDataEntries<Mountain>(sql);
+            return await _databaseService.GetDataEntriesAsync<Mountain>(sql);
         }  
-        public async Task InsertMountainsDataToDb(List<Mountain> mountains)
+        public async Task InsertMountainsDataToDbAsync(List<Mountain> mountains)
         {
             const string sql = @"
             INSERT INTO Mountains (Id, Name, Height) 
             VALUES (@Id, @Name, @Height);";
 
-            await _databaseService.InsertDataEntries<Mountain>(sql, mountains);
+            await _databaseService.InsertDataEntriesAsync<Mountain>(sql, mountains);
         }       
     }
 }
