@@ -19,14 +19,18 @@ namespace MyHikingAPI.Services
         {
             return JsonReader.GetData<Mountain>("Data/mountains.json");
         }      
+
+        // Asynchronous method to retrieve mountains data from the database
         public async Task<List<Mountain>> GetAllMountainsFromDbAsync()
         {
             const string sql = @"
             SELECT Id, Name, Height 
             FROM Mountains;";
 
-            return await _databaseService.GetDataEntriesAsync<Mountain>(sql);
+            return await _databaseService.GetDataEntriesAsync<Mountain>(sql); // await the asynchronous task to complete and return the result (this ensures that the result is returned rather than the Task object itself)
         }  
+
+        // Asynchronous method to insert mountains data into the database
         public async Task InsertMountainsDataToDbAsync(List<Mountain> mountains)
         {
             const string sql = @"
